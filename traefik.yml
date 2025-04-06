@@ -1,0 +1,25 @@
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+  webtraefik:
+    address: ":8081"
+  websecure:
+    address: ":443"
+  websecure_importer:
+    address: ":444"
+api:
+  insecure: true
+providers:
+  docker:
+    exposedByDefault: false
+  file:
+    filename: /etc/traefik/dynamic.yml
+    watch: true
+log:
+  level: DEBUG
